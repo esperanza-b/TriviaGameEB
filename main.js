@@ -46,14 +46,13 @@ var game = {
          timer = setInterval(game.countdown, 1000);
          panel.html("<h2>" + question[this.incorrect.currentQuestion].question + '</h2>');
          for(var i = 0; i< questions[this.currentQuestion].answers.length; i++);
+        {
+            panel.append("<button class= 'answer-button' id= 'button' data-name=' " + 
+            questions[this.currentQuestion].answer[i] +"'>"+ questions[this.currentQuestion.answer[i]
+            + "</buttons>"])
         }
-       
-        
-        panel.append("<button class= 'answer-button' id= 'button' data-name=' " + 
-        questions[this.currentQuestion].answer[i] +"'>"+ questions[this.currentQuestion.answer[i]
-        + "</buttons>"])
 
-    };
+    },
          
             
 
@@ -64,7 +63,7 @@ var game = {
              $("#counter-number").html(game.counter);
              game.currentQuestion++;
              game.loadQuestion9;
-         }
+         },
           timeUp: function() {
               clearInterval(timer);
 
@@ -81,7 +80,7 @@ var game = {
               else{
                   setTimeout(game.realQuestion, 3 * 1000);
               }
-            
+          },
               results: function(){
 
                 clearInterval(timer);
@@ -119,8 +118,9 @@ var game = {
                 }
                 else{
                     setTimeout(game.realQuestion, 3 * 1000);
-                },
-                answeredCorrectly: function()
+                }
+             },
+                answeredCorrectly: function() {
                 panel.html("<h2>CORRECT</h2>")
                 panel.append("<img = scr'" + questions[game.currentQuestion].image + "/>")
                 if (game.currentQuestion === questions.length -1)
@@ -129,7 +129,8 @@ var game = {
                 }
                 else{
                     setTimeout(game.realQuestion, 3 * 1000);
-                },
+                }
+                },         
 
                 reset: function(){
                     this.currentQuestion = 0;
@@ -139,5 +140,22 @@ var game = {
                     this.loadQuestion()
                 },
 
-             }
-           };
+             
+           
+
+
+
+           //CLICK EVENTS
+        //-----------------------------------------------------
+        $(document).on("click","#start-over",function() {
+            game.reset();
+        }),
+
+        $(document).on("click",".answer-button",function(e){
+            game.clicked(e);
+        }),
+
+        $(document).on("click","#start",function(){
+            $("#sub-wrapper").prepend("<h2>Time Remaining: <span id= 'counter-number'>30 </span> Seconds</h2>");
+            game.loadQuestion();
+        });
