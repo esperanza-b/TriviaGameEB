@@ -1,31 +1,53 @@
- var panel= $("#quiz-area")
+var panel = $("#quiz-area");
+
 var countStartNumber = 30;
 
-//Question Set
-var question = [
+// Question set
+var questions = [
     
     {
      question: "What kind of animal was Gentle Ben on the TV show?",
-     answers:["Frog", "Tiger","Dog"],
-     correctAnswer:"A Bear",
+     answers:["Frog", "Tiger","Dog","Bear"],
+     correctAnswer:"Bear",
      image:"Assets/bear.gif",
     },
 
      {
          question: "A female donkey is called a what?",
-     answers:["Donkeyness", "Luna","Tigress"],
-     correctAnswer:"A Jenny",
+     answers:["Donkeyness", "Luna","Jenny","Tigress"],
+     correctAnswer:"Jenny",
      image:"Assets/donkey.gif",
       
     },
 
+    {question: " What are the only two mammals that lay eggs?",
+     answers:["Anteater", "Whale","Duck billed platypus","Llama"],
+     correctAnswer:"Duck billed platypus",
+     image:"Assets/Perry the Platypus.gif",
+    },
+
+     {
+         question: "What type of animal is a Mexican hairless?",
+     answers:["Cat","Dog","Chicken","Turtle"],
+     correctAnswer:"Dog",
+     image:"Assets/doggy.gif",
+      
+    },
+
+    {
+        question: "What kind of creature is a Portuguese man o' war?",
+     answers:["Jellyfish","Nemo", "Shrimp","Iguana"],
+     correctAnswer:"Jellyfish",
+     image:"Assets/spongebob.gif",
+},
+      
 ]
 // Variable to hold our setInterval
 var timer;
 
 var game = {
 
-    questions: question,
+    questions: questions,
     currentQuestion: 0,
     counter: countStartNumber,
     correct: 0,
@@ -108,11 +130,11 @@ var game = {
 
     },
 
-    
     answeredIncorrectly: function() {
 
         game.incorrect++;
-       clearInterval(timer);
+
+        clearInterval(timer);
 
         panel.html("<h2>Nope!</h2>");
         panel.append("<h3>The Correct Answer was: " + questions[game.currentQuestion].correctAnswer + "</h3>");
